@@ -15,10 +15,28 @@ export class UsersService {
     async createUser(data: ICreateProfile) {
         try {
             let userExist = await this.userModel.findOne({ email: data?.email })
-            if(!userExist){
+            if (!userExist) {
                 return await this.userModel.create(data)
             }
             return await this.userModel.findByIdAndUpdate(userExist?._id, data)
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+
+    async getUser(userId: string) {
+        try {
+            const user = await this.userModel.findById(userId)
+            return user
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
+    async getUserById(user:any) {
+        try {
+            return await this.getUser(user?._id)
         } catch (error) {
             console.log(error.message)
         }
