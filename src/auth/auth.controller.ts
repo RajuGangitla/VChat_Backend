@@ -20,7 +20,6 @@ export class AuthController {
     @Get('google/callback')
     @UseGuards(AuthGuard('google'))
     async googleLoginCallback(@Req() req, @Res({ passthrough: true }) res:Response) {
-        console.log(req.user, "user")
         await this.authService.validateUser(req.user, res)
         return res.redirect(this.configService.get("FRONTEND_URL"));
     }

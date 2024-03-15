@@ -23,7 +23,6 @@ export class AuthService {
         try {
             const user = await this.userService.createUser(data)
             const token = await this.jwtService.signAsync({ userId: user?._id }, { expiresIn: "365d", })
-            console.log(token, "tokkkkkken")
             res.cookie("authorization", `Bearer ${token}`, {
                 httpOnly:true,
                 secure:true,
