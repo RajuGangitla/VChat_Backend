@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invite Friends</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f2f2f2;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            /* Center align contents */
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .invite-button {
+            display: inline-block;
+            padding: 12px 24px;
+            text-align: center;
+            color: #fff;
+            background-color: #ff6600;
+            /* Change button color */
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .invite-button:hover {
+            background-color: #cc5500;
+            /* Darker color on hover */
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: #999;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <img src="path/to/your/logo.png" alt="Your Logo" style="max-width: 200px;">
+        <h1>Join Our Chat Community!</h1>
+        <p>Hello <%= recipientName %>,</p>
+        <p>We're thrilled to invite you to join our vibrant chat community! Connect with friends, share moments, and
+            engage in meaningful conversations.</p>
+        <p>To join, simply click the button below:</p>
+        <a href="<%= inviteLink %>" class="invite-button">Join Now</a>
+        <p>If you have any questions or need assistance, feel free to reach out to us.</p>
+        <p>Best regards,<br>
+            <%= currentUser %>
+        </p> <!-- Insert user's name here -->
+    </div>
+    <div class="footer">
+        &copy; 2024 VChatApp | All rights reserved
+    </div>
+</body>
+
+</html>

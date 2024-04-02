@@ -9,11 +9,15 @@ import { LoggingInterceptor } from './auth/logging.interceptor';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UsersModule } from './users/users.module';
+import { EmailModule } from './email/email.module';
+import { InvitationModule } from './invitation/invitation.module';
 
 
 @Module({
     imports: [
-        ConfigModule.forRoot(),
+        ConfigModule.forRoot({
+            isGlobal: true
+        }),
         MongooseModule.forRootAsync({
             imports: [ConfigModule],
             inject: [ConfigService],
@@ -23,7 +27,9 @@ import { UsersModule } from './users/users.module';
         }
         ),
         AuthModule,
-        UsersModule
+        UsersModule,
+        EmailModule,
+        InvitationModule
     ],
     controllers: [AppController, AuthController],
     providers: [
