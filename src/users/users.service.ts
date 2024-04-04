@@ -3,15 +3,13 @@ import { Users, UsersDocument } from './schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ICreateProfile } from './types';
-import { InviteFriendsDto } from './dto/users.dto';
-import { EmailService } from 'src/email/email.service';
+
 
 
 @Injectable()
 export class UsersService {
     constructor(
         @InjectModel(Users.name) private userModel: Model<UsersDocument>,
-        private emailService: EmailService
     ) { }
 
 
@@ -45,16 +43,5 @@ export class UsersService {
         }
     }
 
-    async inviteFriends(user, inviteFriendsDto: InviteFriendsDto) {
-        try {
-            let result = Promise.all(
-                inviteFriendsDto?.invitees?.map(async (email: string) => {
-                    await this.emailService.invitation(user, email)
-                })
-            )
-            return result
-        } catch (error) {
-            console.log(error.message)
-        }
-    }
+
 }

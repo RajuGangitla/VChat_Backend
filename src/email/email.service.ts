@@ -1,12 +1,12 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import * as path from 'path';
 import { promises as fsPromises } from 'fs';
 import * as ejs from 'ejs';
 import * as nodemailer from 'nodemailer';
 import { ConfigService } from '@nestjs/config';
-import { Users } from 'src/users/schema/users.schema';
 import { InvitationService } from 'src/invitation/invitation.service';
 import { InvitationStatus } from 'src/invitation/types';
+
 
 
 @Injectable()
@@ -14,6 +14,7 @@ export class EmailService {
     private readonly transporter;
     constructor(
         private configService: ConfigService,
+        @Inject(forwardRef(() => InvitationService))
         private invitationService: InvitationService
     ) {
         this.transporter = nodemailer.createTransport({

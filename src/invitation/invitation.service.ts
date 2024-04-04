@@ -1,13 +1,17 @@
-import { Injectable } from '@nestjs/common';
+import { Inject, Injectable, forwardRef } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Invitation, InvitationDocument } from './schema/invitation.schema';
 import { Model } from 'mongoose';
 import { ICreateInvitation } from './types';
+import { InviteFriendsDto } from 'src/users/dto/users.dto';
+import { EmailService } from 'src/email/email.service';
 
 @Injectable()
 export class InvitationService {
     constructor(
-        @InjectModel(Invitation.name) private invitationModel: Model<InvitationDocument>
+        @InjectModel(Invitation.name) private invitationModel: Model<InvitationDocument>,
+        @Inject(forwardRef(() => EmailService))
+        private emailService: EmailService
     ) { }
 
 
@@ -22,6 +26,20 @@ export class InvitationService {
             console.log(error.message)
         }
     }
+
+    async inviteFriends(user, inviteFriendsDto: InviteFriendsDto) {
+        try {
+            let result = Promise.all(
+                inviteFriendsDto?.invitees?.map(async (email: string) => {
+                    await this.emailService.invitation(user, email)
+                })
+            )
+            return result
+        } catch (error) {
+            console.log(error.message)
+        }
+    }
+
 
     async customInviteId() {
         try {
