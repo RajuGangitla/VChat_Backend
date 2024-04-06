@@ -1,9 +1,17 @@
 import { IsArray, IsNotEmpty, IsString } from "class-validator"
 
 export class InviteFriendsDto {
-    @IsArray()
+    @IsString()
     @IsNotEmpty()
-    invitees: string[]
+    firstName: string
+
+    @IsString()
+    @IsNotEmpty()
+    lastName: string
+
+    @IsString()
+    @IsNotEmpty()
+    email: string
 
 }
 
