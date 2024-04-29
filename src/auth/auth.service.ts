@@ -8,7 +8,7 @@ import { UsersService } from 'src/users/users.service';
 export class AuthService {
     constructor(
         private userService: UsersService,
-        private jwtService:JwtService,
+        private jwtService: JwtService,
     ) { }
 
     async googleLogin() {
@@ -19,13 +19,13 @@ export class AuthService {
         }
     }
 
-    async validateUser(data: ICreateProfile, res:Response) {
+    async validateUser(data: ICreateProfile, res: Response) {
         try {
             const user = await this.userService.createUser(data)
             const token = await this.jwtService.signAsync({ userId: user?._id }, { expiresIn: "365d", })
             res.cookie("authorization", `Bearer ${token}`, {
-                httpOnly:true,
-                secure:true,
+                httpOnly: true,
+                secure: true,
                 maxAge: Date.now() + 10 * 365 * 24 * 60 * 60,
                 sameSite: "none",
             })
