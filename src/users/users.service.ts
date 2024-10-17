@@ -3,6 +3,7 @@ import { Users, UsersDocument } from './schema/users.schema';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ICreateProfile } from './types';
+import { verifyKey } from '@unkey/api';
 
 
 
@@ -37,6 +38,20 @@ export class UsersService {
 
     async getUserById(user) {
         try {
+            const { result, error } = await verifyKey({
+                apiId: "api_3C7xwzUzhaCw4uredhkANB8J9aP8",
+                key: "raju_3ZMFcLkj5PmPWsQfMMRtwg6R"
+            })
+
+            console.log(result.code, "CODE")
+
+            if (error) {
+                // handle network error
+            }
+
+            if (!result.valid) {
+                // reject unauthorized request
+            }
             return await this.getUser(user?._id)
         } catch (error) {
             console.log(error.message)

@@ -12,7 +12,7 @@ export class LoggingInterceptor implements NestInterceptor {
         const apiName = request.route.path; // Assuming you're interested in the route path
 
         return next.handle().pipe(
-            tap(() => console.log(`API: ${apiName} - Execution time: ${Date.now() - now}ms`)),
+            // tap(() => console.log(`API: ${apiName} - Execution time: ${Date.now() - now}ms`)),
         );
     }
 }
