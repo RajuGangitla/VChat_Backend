@@ -13,5 +13,10 @@ export class InviteFriendsDto {
     @IsNotEmpty()
     email: string
 
+
+    @IsString()
+    @IsNotEmpty()
+    last: string
+
 }
 
