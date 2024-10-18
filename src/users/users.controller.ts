@@ -20,4 +20,10 @@ export class UsersController {
     }
 
 
+    @UseGuards(AuthGuard())
+    @Get("/getUser")
+    async getUser(@currentUser() user: Users) {
+
+    }
+
 }   
